@@ -7,7 +7,7 @@ Below are descriptions of the stories I worked on, along with code snippets and 
 
 # Back End Stories
 
-I was asked to create an entity model for the Production class so that productions can be saved to the database. First, I needed to create a model, and then create a CRUD pages for it.  
+I created an entity model for the Production class so that productions can be saved to the database. First, I needed to create a production model, and then create a CRUD pages  to provide users with a way to interact with the database to create, read, update and delete(CRUD) items.  
 ```
 using System;
 using System.Collections.Generic;
@@ -18,6 +18,7 @@ using System.Drawing;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
+#nullable disable
 namespace TheatreCMS2.Models
 {
     public class ProductionModel
@@ -26,14 +27,14 @@ namespace TheatreCMS2.Models
         public int ProductionId { get; set; }       // production primary key
         [Required]
         public string Title { get; set; }           // production title
-        public string Playwright { get; set; }      // production playwright
+        public string? Playwright { get; set; }     // production playwright
         public string Description { get; set; }     // production description
 
         [Display(Name = "Opening Day")]
         public DateTime OpeningDay { get; set; }    // production opening day
 
         [Display(Name = "Closing Day")]
-        public DateTime ClosingDay { get; set; }    // production closing day
+        public DateTime? ClosingDay { get; set; }    // production closing day
 
         //[Display(Name = "Promo Photo")]
         //public virtual ProductionPhoto DefaultPhoto { get; set; }
@@ -46,7 +47,7 @@ namespace TheatreCMS2.Models
         [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
         [Display(Name = "Matinee Showtime")]
-        public DateTime? ShowtimeMat { get; set; }  // production matinee showtime
+        public DateTime ShowtimeMat { get; set; }  // production matinee showtime
 
         [Display(Name = "Ticket Link")]
         public string TicketLink { get; set; }      // url for purchasing tickets
@@ -59,7 +60,7 @@ namespace TheatreCMS2.Models
     }
 }
 ```
-In this story, I was asked to to seed the databse with  15 mock entries in the productions table. 
+I created a way to seed the database with 15 mock entries in the productions table using code-first migrations
 ```
 namespace TheatreCMS2.Migrations
 {
@@ -208,9 +209,9 @@ namespace TheatreCMS2.Migrations
 }
 ```
 
-# Front-End
+# Front-End Story
 
-For this story I was asked to create a reusable Card for the website so we can keep any Cards we use consistent across the site.
+For this story I created a partial view for any Cards that can be created on this website to make it reusable so we can keep them consistent across the site.
 
 ```
 <div class="card" style="width: 18rem;">
